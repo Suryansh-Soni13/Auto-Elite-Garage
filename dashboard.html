@@ -5,43 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | AutoElite Garage</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .sidebar .logo {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .main-content h1 {
-            font-size: 1.75rem;
-            margin-bottom: 2rem;
-            color: #0f172a;
-        }
-
-        .input-group input,
-        .input-group select {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            color: var(--text);
-            padding: 0.75rem 1rem;
-        }
-
-        .view-card {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 24px;
-            border: 1px solid #eef2f6;
-            box-shadow: var(--shadow-sm);
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="dash-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <a href="index.html" class="logo" style="text-decoration:none;">AUTO<span>ELITE</span></a>
-            <nav class="nav-list" style="flex:1;">
+            <a href="index.html" class="logo">AUTO<span>ELITE</span></a>
+            <nav class="nav-list">
                 <a href="#" class="nav-link active" onclick="showView('overview')">Overview</a>
                 <a href="#" class="nav-link" id="nav-book" onclick="showView('booking')">Book Service</a>
                 <a href="#" class="nav-link" id="nav-mechanic" style="display:none;"
@@ -56,7 +28,7 @@
                     Out</a>
             </nav>
 
-            <div class="user-profile" style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid #f1f5f9;">
+            <div class="user-profile">
                 <div id="userName" style="font-weight:700; color:#0f172a;">Loading...</div>
                 <div id="userRole"
                     style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">
@@ -66,13 +38,13 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <h1 id="viewTitle">Dashboard Overview</h1>
+            <h1 id="viewTitle" class="view-title">Dashboard Overview</h1>
 
             <!-- Overview View -->
             <div id="overviewView" class="view">
                 <div class="stat-grid" id="statGrid"></div>
                 <div class="view-card">
-                    <h3 style="margin-bottom:1.5rem;">Recent Activity</h3>
+                    <h3>Recent Activity</h3>
                     <div class="table-container">
                         <table>
                             <thead>
@@ -92,11 +64,11 @@
 
             <!-- Booking View -->
             <div id="bookingView" class="view" style="display:none;">
-                <div class="view-card" style="max-width:850px;">
-                    <h2 style="margin-bottom:0.5rem;">Schedule Service</h2>
+                <div class="view-card booking-card">
+                    <h2>Schedule Service</h2>
                     <p style="color:var(--text-muted); margin-bottom:2.5rem;">Fill in your vehicle details to request a
                         maintenance slot.</p>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
                         <div class="input-group">
                             <label>Car Model</label>
                             <input type="text" id="bookCar" placeholder="e.g. BMW M4">
@@ -170,9 +142,8 @@
             <!-- Daily Analysis -->
             <div id="dailyView" class="view" style="display:none;">
                 <div class="view-card">
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
-                        <h2 style="margin:0;">Daily Fleet Overview</h2>
+                    <div class="dash-card-header">
+                        <h2 class="view-title" style="margin:0;">Daily Fleet Overview</h2>
                         <input type="date" id="analysisDate" class="btn btn-outline" onchange="loadDailyAnalysis()">
                     </div>
                     <div class="stat-grid" id="dailyStats" style="margin-bottom:3rem;"></div>
@@ -207,10 +178,9 @@
                     </div>
                 </div>
                 <div class="view-card" style="margin-top:2rem;">
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+                    <div class="dash-card-header">
                         <h3 style="margin:0;">Global Bookings</h3>
-                        <div style="display:flex; gap:0.75rem;">
+                        <div class="action-group">
                             <button class="btn btn-outline" style="font-size:0.8rem;" onclick="backupData()">Backup
                                 System</button>
                             <button class="btn btn-outline" style="font-size:0.8rem;"
@@ -241,7 +211,7 @@
 
     <!-- Modals (Checklist, OTP) -->
     <div class="modal" id="serviceModal">
-        <div class="view-card" style="width:100%; max-width:600px;">
+        <div class="view-card modal-md">
             <h2 id="serviceModalTitle">Update Service Profile</h2>
             <div id="serviceInfo" style="margin: 1rem 0; color:var(--text-muted);"></div>
             <div class="input-group">
@@ -256,7 +226,7 @@
                 <label>Service Cost (₹)</label>
                 <input type="number" id="jobCostInput" placeholder="Enter INR amount">
             </div>
-            <div id="serviceChecklist" style="margin: 2rem 0; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div id="serviceChecklist" class="service-checklist-grid">
             </div>
             <div style="display:flex; gap:1rem;">
                 <button class="btn btn-primary" style="flex:2;" onclick="saveServiceJob()">Save Update</button>
@@ -266,7 +236,7 @@
     </div>
 
     <div class="modal" id="paymentModal">
-        <div class="view-card" style="max-width:440px; text-align:center;">
+        <div class="view-card modal-sm">
             <h2>Secure Verification</h2>
             <div id="paymentStep1">
                 <p style="color:var(--text-muted); margin: 1rem 0 2rem;">Confirm your identity via OTP to mobile ending
@@ -275,15 +245,11 @@
             </div>
             <div id="paymentStep2" style="display:none;">
                 <p style="margin-bottom:1.5rem;">Enter the 4-digit security code</p>
-                <div style="display:flex; justify-content:center; gap:0.5rem; margin-bottom:2rem;">
-                    <input type="text" maxlength="1" class="otp-digit" id="otp1"
-                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
-                    <input type="text" maxlength="1" class="otp-digit" id="otp2"
-                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
-                    <input type="text" maxlength="1" class="otp-digit" id="otp3"
-                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
-                    <input type="text" maxlength="1" class="otp-digit" id="otp4"
-                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+                <div class="otp-wrapper">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp1">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp2">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp3">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp4">
                 </div>
                 <button class="btn btn-primary" style="width:100%;" onclick="verifyBooking()">Confirm Booking</button>
                 <button class="btn btn-outline" style="width:100%; margin-top:1rem; border:none;"
@@ -292,18 +258,15 @@
         </div>
     </div>
 
-    <div id="otpPopup"
-        style="display:none; position:fixed; bottom:20px; right:20px; background:white; padding:1.5rem; border-radius:24px; box-shadow: var(--shadow-lg); border:1px solid #e2e8f0; z-index:5000; width:300px;">
+    <div id="otpPopup" class="otp-sim-popup" style="display:none;">
         <h4 style="color:var(--primary); margin-bottom:0.5rem;">📱 SIMULATED SMS</h4>
         <p style="font-size:0.9rem;">Your AutoElite security code is:</p>
         <h1 id="generatedOTP" style="letter-spacing:8px; margin:0.5rem 0;">1234</h1>
         <p style="font-size:0.75rem; color:var(--text-muted);">Valid for 5 minutes.</p>
     </div>
 
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
-
 </html>
-

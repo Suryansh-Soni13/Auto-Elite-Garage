@@ -5,59 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In | AutoElite Garage</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .auth-wrapper {
-            min-height: calc(100vh - 80px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-        }
-
-        .auth-card {
-            width: 100%;
-            max-width: 440px;
-            padding: 3rem;
-            border-radius: 32px;
-            background: #fff;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-            border: 1px solid #f1f5f9;
-        }
-
-        .tab-btn {
-            border-bottom: 3px solid transparent;
-            padding: 0.75rem 0;
-            color: var(--text-muted);
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .input-group input,
-        .input-group select {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            color: var(--text);
-            padding: 0.85rem 1rem;
-        }
-
-        .input-group input:focus {
-            background: #fff;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <header>
-        <div class="container" style="display:flex; justify-content:space-between; width:100%;">
+        <div class="container">
             <a href="index.html" class="logo">AUTO<span>ELITE</span></a>
             <nav><a href="index.html">Back to Home</a></nav>
         </div>
@@ -65,39 +18,38 @@
 
     <div class="auth-wrapper">
         <div class="auth-card animate">
-            <div style="display:flex; gap:2rem; margin-bottom:2.5rem; justify-content:center;">
+            <div class="auth-tab-group">
                 <div class="tab-btn active" id="loginTab" onclick="switchTab('login')">Login</div>
                 <div class="tab-btn" id="regTab" onclick="switchTab('register')">Create Account</div>
             </div>
 
             <div id="loginForm" class="auth-content">
-                <h2 style="margin-bottom: 0.5rem; text-align:center;">Welcome back</h2>
+                <h2 style="text-align:center;">Welcome back</h2>
                 <p style="color:var(--text-muted); text-align:center; margin-bottom:2.5rem;">Manage your elite service
                     profile.</p>
 
-                <div class="input-group" style="display:flex; flex-direction:column; gap:0.5rem;">
-                    <label style="margin:0;">Email Address</label>
+                <div class="input-group">
+                    <label>Email Address</label>
                     <input type="email" id="loginEmail" placeholder="name@email.com" value="customer@test.com">
                 </div>
-                <div class="input-group" style="display:flex; flex-direction:column; gap:0.5rem;">
-                    <label style="margin:0;">Password</label>
+                <div class="input-group">
+                    <label>Password</label>
                     <input type="password" id="loginPass" placeholder="••••••••" value="pass123">
                 </div>
-                <div class="input-group" style="display:flex; flex-direction:column; gap:0.5rem;">
-                    <label style="margin:0;">Role</label>
-                    <select id="loginRole" style="width:100%;">
+                <div class="input-group">
+                    <label>Role</label>
+                    <select id="loginRole">
                         <option value="customer">Customer</option>
                         <option value="mechanic">Mechanic</option>
                         <option value="admin">Administrator</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" style="width:100%; margin-top:1.5rem; padding:1.2rem;"
-                    onclick="handleLogin()">Sign In</button>
+                <button class="btn btn-primary" style="width:100%; margin-top:1.5rem;" onclick="handleLogin()">Sign
+                    In</button>
                 <p id="loginError" style="color:var(--danger); margin-top:1rem; font-size:0.9rem; text-align:center;">
                 </p>
 
-                <div
-                    style="margin-top:2.5rem; padding:1.25rem; background:#f0f9ff; border-radius:16px; font-size:0.85rem; color:#1e40af; border: 1px solid #dbeafe;">
+                <div class="alert-info">
                     <strong>Demo Credentials:</strong><br>
                     Customer: customer@test.com / pass123<br>
                     Mechanic: mech@test.com / pass123<br>
@@ -106,7 +58,7 @@
             </div>
 
             <div id="registerForm" class="auth-content" style="display:none;">
-                <h2 style="margin-bottom: 0.5rem; text-align:center;">Get started</h2>
+                <h2 style="text-align:center;">Get started</h2>
                 <p style="color:var(--text-muted); text-align:center; margin-bottom:2.5rem;">Join the elite car care
                     community.</p>
 
@@ -132,8 +84,8 @@
         </div>
     </div>
 
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
     <script>
         function switchTab(tab) {
             const contents = document.querySelectorAll('.auth-content');
@@ -155,6 +107,4 @@
     </script>
 </body>
 
-
 </html>
-
