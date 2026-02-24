@@ -97,6 +97,27 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile-sign-in {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-sign-in {
+        display: inline-flex;
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
 }
 
 .logo {
@@ -944,17 +965,22 @@ td {
         height: 70px;
     }
 
+    .logo {
+        font-size: 1.25rem;
+    }
+
     nav {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 70px;
         left: 0;
         width: 100%;
+        height: calc(100vh - 70px);
         background: white;
         flex-direction: column;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow);
+        padding: 2rem;
+        z-index: 999;
+        overflow-y: auto;
     }
 
     nav.active {
@@ -976,12 +1002,15 @@ td {
     }
 
     .mobile-menu-btn {
-        display: block;
-        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f1f5f9;
+        border-radius: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
         border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: var(--text);
     }
 
     .hero-text {
@@ -997,7 +1026,7 @@ td {
         margin-right: auto;
     }
 
-    .hero-text div {
+    .hero-text .btn-group {
         justify-content: center;
     }
 

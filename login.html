@@ -104,6 +104,14 @@
                 document.getElementById('registerForm').style.display = 'block';
             }
         }
+
+        // Handle direct links to Register tab
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('tab') === 'register') {
+                switchTab('register');
+            }
+        });
     </script>
 </body>
 
