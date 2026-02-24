@@ -107,12 +107,12 @@ header .container {
 }
 
 .mobile-sign-in {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 768px) {
     .mobile-sign-in {
-        display: inline-flex;
+        display: inline-flex !important;
     }
 
     .desktop-only {
