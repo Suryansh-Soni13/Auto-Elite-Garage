@@ -16,12 +16,22 @@
     --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
-    /* Fluid Typography */
-    --h1-size: 5rem;
-    --h2-size: 3rem;
+    /* Fluid Typography & Spacing */
+    --h1-size: clamp(2.5rem, 8vw, 5rem);
+    --h2-size: clamp(2rem, 5vw, 3rem);
     --h3-size: 1.5rem;
     --body-size: 1rem;
-    --hero-p-size: 1.35rem;
+    --hero-p-size: clamp(1.1rem, 2vw, 1.35rem);
+    --section-padding: clamp(60px, 10vw, 120px);
+}
+
+img,
+video,
+iframe,
+canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 * {
@@ -104,6 +114,13 @@ header .container {
 
 .mobile-menu-btn {
     display: none;
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    cursor: pointer;
+    color: var(--text);
+    padding: 0.5rem;
+    line-height: 1;
 }
 
 nav a {
@@ -211,6 +228,7 @@ nav a:hover {
     flex: 1;
     position: relative;
     animation-delay: 0.2s;
+    width: 100%;
 }
 
 .hero-image img {
@@ -221,8 +239,8 @@ nav a:hover {
 
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 2rem;
 }
 
 /* Why Us Section */
@@ -300,8 +318,8 @@ nav a:hover {
 
 .section-header {
     text-align: center;
-    max-width: 700px;
-    margin: 0 auto 60px;
+    max-width: 800px;
+    margin: 0 auto clamp(40px, 5vw, 60px);
 }
 
 .view-title {
@@ -329,17 +347,19 @@ nav a:hover {
 
 .section-header h2 {
     font-size: var(--h2-size);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     color: #1e293b;
+    line-height: 1.25;
 }
 
 .feature-card {
     background: white;
-    padding: 3rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
     border-radius: 32px;
     border: 1px solid #eef2f6;
     transition: 0.3s;
     text-align: center;
+    height: 100%;
 }
 
 .feature-card:hover {
@@ -363,8 +383,8 @@ nav a:hover {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1.5rem;
 }
 
 .gallery-item {
@@ -393,8 +413,8 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
-    .section-header h2 {
-        font-size: 2rem;
+    .hero-text h1 {
+        font-size: 2.5rem;
     }
 
     .gallery-grid {
@@ -710,16 +730,12 @@ td {
 }
 
 .section-padding {
-    padding: 120px 0;
+    padding: var(--section-padding) 0;
 }
 
 @media (max-width: 768px) {
-    .section-padding {
-        padding: 60px 0;
-    }
-
     .hero {
-        padding: 60px 0;
+        padding: 40px 0 60px;
     }
 }
 
@@ -1034,15 +1050,26 @@ td {
     }
 
     .view-card {
-        padding: 1.5rem;
+        padding: 1.25rem;
     }
 
     .btn {
         width: 100%;
-        /* Full width buttons on small phones */
+        margin-left: 0 !important;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    header .container {
+        padding: 0 1rem;
     }
 }
 
-.mobile-menu-btn {
-    display: none;
-}
+/* Remove duplicated hiding of mobile menu btn at the end */
