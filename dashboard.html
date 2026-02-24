@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | AutoElite Garage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .sidebar .logo {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .main-content h1 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            color: #0f172a;
+        }
+
+        .input-group input,
+        .input-group select {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            color: var(--text);
+            padding: 0.75rem 1rem;
+        }
+
+        .view-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid #eef2f6;
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dash-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="index.html" class="logo" style="text-decoration:none;">AUTO<span>ELITE</span></a>
+            <nav class="nav-list" style="flex:1;">
+                <a href="#" class="nav-link active" onclick="showView('overview')">Overview</a>
+                <a href="#" class="nav-link" id="nav-book" onclick="showView('booking')">Book Service</a>
+                <a href="#" class="nav-link" id="nav-mechanic" style="display:none;"
+                    onclick="showView('mechanic')">Service Jobs</a>
+                <a href="#" class="nav-link" id="nav-reports" style="display:none;"
+                    onclick="showView('reports')">Service Reports</a>
+                <a href="#" class="nav-link" id="nav-daily-report" style="display:none;"
+                    onclick="showView('daily')">Daily Analysis</a>
+                <a href="#" class="nav-link" id="nav-admin" style="display:none;" onclick="showView('admin')">Company
+                    Panel</a>
+                <a href="#" class="nav-link" onclick="logout()" style="color:var(--danger); margin-top:auto;">Sign
+                    Out</a>
+            </nav>
+
+            <div class="user-profile" style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid #f1f5f9;">
+                <div id="userName" style="font-weight:700; color:#0f172a;">Loading...</div>
+                <div id="userRole"
+                    style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">
+                    User</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 id="viewTitle">Dashboard Overview</h1>
+
+            <!-- Overview View -->
+            <div id="overviewView" class="view">
+                <div class="stat-grid" id="statGrid"></div>
+                <div class="view-card">
+                    <h3 style="margin-bottom:1.5rem;">Recent Activity</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Vehicle</th>
+                                    <th>Service Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activityTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking View -->
+            <div id="bookingView" class="view" style="display:none;">
+                <div class="view-card" style="max-width:850px;">
+                    <h2 style="margin-bottom:0.5rem;">Schedule Service</h2>
+                    <p style="color:var(--text-muted); margin-bottom:2.5rem;">Fill in your vehicle details to request a
+                        maintenance slot.</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+                        <div class="input-group">
+                            <label>Car Model</label>
+                            <input type="text" id="bookCar" placeholder="e.g. BMW M4">
+                        </div>
+                        <div class="input-group">
+                            <label>License Plate</label>
+                            <input type="text" id="bookPlate" placeholder="XYZ-1234">
+                        </div>
+                        <div class="input-group">
+                            <label>Service Type</label>
+                            <select id="bookType">
+                                <option value="Full Service">Performance Full Service</option>
+                                <option value="Partial Service">Advanced Partial Service</option>
+                                <option value="Routine Service">Elite Routine Maintenance</option>
+                                <option value="Needed Services">Targeted 'Only Needed' Service</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Preferred Date</label>
+                            <input type="date" id="bookDate" onchange="checkSlots()">
+                            <small id="slotCounter" style="display:block; margin-top:0.5rem; font-weight:600;"></small>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top:2rem; width:100%;"
+                        onclick="requestBooking()">Continue to Verification</button>
+                </div>
+            </div>
+
+            <!-- Mechanic View -->
+            <div id="mechanicView" class="view" style="display:none;">
+                <div class="view-card">
+                    <h3 style="margin-bottom:1.5rem;">Assigned Service Jobs</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Owner</th>
+                                    <th>Vehicle</th>
+                                    <th>Status</th>
+                                    <th>Operation</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mechanicTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports View -->
+            <div id="reportsView" class="view" style="display:none;">
+                <div class="view-card">
+                    <h3>Your Service Reports</h3>
+                    <div class="table-container" style="margin-top:1.5rem;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Export</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Analysis -->
+            <div id="dailyView" class="view" style="display:none;">
+                <div class="view-card">
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+                        <h2 style="margin:0;">Daily Fleet Overview</h2>
+                        <input type="date" id="analysisDate" class="btn btn-outline" onchange="loadDailyAnalysis()">
+                    </div>
+                    <div class="stat-grid" id="dailyStats" style="margin-bottom:3rem;"></div>
+                    <h3>Detailed Logs</h3>
+                    <div class="table-container" style="margin-top:1.5rem;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Owner</th>
+                                    <th>Vehicle</th>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dailyTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin View -->
+            <div id="adminView" class="view" style="display:none;">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <h3>Operating Revenue</h3>
+                        <div class="value" id="totalEarned" style="color:var(--primary)">₹0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Volume</h3>
+                        <div class="value" id="totalBookings">0</div>
+                    </div>
+                </div>
+                <div class="view-card" style="margin-top:2rem;">
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+                        <h3 style="margin:0;">Global Bookings</h3>
+                        <div style="display:flex; gap:0.75rem;">
+                            <button class="btn btn-outline" style="font-size:0.8rem;" onclick="backupData()">Backup
+                                System</button>
+                            <button class="btn btn-outline" style="font-size:0.8rem;"
+                                onclick="document.getElementById('importFile').click()">Import Data</button>
+                            <input type="file" id="importFile" style="display:none;" onchange="importData(event)">
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Car</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals (Checklist, OTP) -->
+    <div class="modal" id="serviceModal">
+        <div class="view-card" style="width:100%; max-width:600px;">
+            <h2 id="serviceModalTitle">Update Service Profile</h2>
+            <div id="serviceInfo" style="margin: 1rem 0; color:var(--text-muted);"></div>
+            <div class="input-group">
+                <label>Job Progress</label>
+                <select id="jobStatusSelect">
+                    <option value="confirmed">Awaiting Service</option>
+                    <option value="under service">Under Service</option>
+                    <option value="service done">Service Done</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Service Cost (₹)</label>
+                <input type="number" id="jobCostInput" placeholder="Enter INR amount">
+            </div>
+            <div id="serviceChecklist" style="margin: 2rem 0; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            </div>
+            <div style="display:flex; gap:1rem;">
+                <button class="btn btn-primary" style="flex:2;" onclick="saveServiceJob()">Save Update</button>
+                <button class="btn btn-outline" style="flex:1;" onclick="closeServiceModal()">Discard</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="paymentModal">
+        <div class="view-card" style="max-width:440px; text-align:center;">
+            <h2>Secure Verification</h2>
+            <div id="paymentStep1">
+                <p style="color:var(--text-muted); margin: 1rem 0 2rem;">Confirm your identity via OTP to mobile ending
+                    in <span id="phoneLast4">XXXX</span>.</p>
+                <button class="btn btn-primary" style="width:100%;" onclick="sendOTP()">Send SMS OTP</button>
+            </div>
+            <div id="paymentStep2" style="display:none;">
+                <p style="margin-bottom:1.5rem;">Enter the 4-digit security code</p>
+                <div style="display:flex; justify-content:center; gap:0.5rem; margin-bottom:2rem;">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp1"
+                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp2"
+                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp3"
+                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+                    <input type="text" maxlength="1" class="otp-digit" id="otp4"
+                        style="width:50px; height:60px; text-align:center; font-size:1.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+                </div>
+                <button class="btn btn-primary" style="width:100%;" onclick="verifyBooking()">Confirm Booking</button>
+                <button class="btn btn-outline" style="width:100%; margin-top:1rem; border:none;"
+                    onclick="closeModal()">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="otpPopup"
+        style="display:none; position:fixed; bottom:20px; right:20px; background:white; padding:1.5rem; border-radius:24px; box-shadow: var(--shadow-lg); border:1px solid #e2e8f0; z-index:5000; width:300px;">
+        <h4 style="color:var(--primary); margin-bottom:0.5rem;">📱 SIMULATED SMS</h4>
+        <p style="font-size:0.9rem;">Your AutoElite security code is:</p>
+        <h1 id="generatedOTP" style="letter-spacing:8px; margin:0.5rem 0;">1234</h1>
+        <p style="font-size:0.75rem; color:var(--text-muted);">Valid for 5 minutes.</p>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

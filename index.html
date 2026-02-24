@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoElite Garage | Modern Car Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hero {
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            background: radial-gradient(circle at 100% 0%, #eff6ff 0%, #ffffff 50%);
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 32px;
+            border: 1px solid #eef2f6;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+            border-color: #dbeafe;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #eff6ff;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 2rem;
+            color: var(--primary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            border-radius: 24px;
+            overflow: hidden;
+            height: 300px;
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .map-section {
+            background: #f1f5f9;
+            padding: 80px 0;
+            border-radius: 48px;
+            margin: 80px 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 0;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+            <a href="index.html" class="logo">AUTO<span>ELITE</span></a>
+            <nav id="mainNav">
+                <a href="#services">Services</a>
+                <a href="#why-us">Why Us</a>
+                <a href="login.html" class="btn btn-primary" style="margin-left: 2rem;">Sign In</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Full-Width Hero Section -->
+        <section class="hero"
+            style="background: radial-gradient(circle at 100% 0%, #f0f7ff 0%, #ffffff 70%); padding: 120px 0;">
+            <div class="container" style="display:flex; align-items:center; gap:4rem;">
+                <div class="hero-text animate" style="flex: 1.2;">
+                    <h1
+                        style="font-size: 5rem; line-height: 1.1; margin-bottom: 2rem; color: #010b1a; font-weight: 800;">
+                        Precision Care for <span style="color:var(--primary)">Elite Performance.</span></h1>
+                    <p
+                        style="font-size: 1.35rem; color: #475569; margin-bottom: 3rem; max-width: 600px; line-height: 1.6;">
+                        The ultimate destination for premium automotive detailing. Leverage certified expertise,
+                        high-tech paint protection, and real-time service tracking.</p>
+                    <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+                        <a href="login.html" class="btn btn-primary"
+                            style="padding: 1.1rem 2.8rem; font-size: 1.1rem;">Schedule Inspection</a>
+                        <a href="#services" class="btn btn-outline"
+                            style="padding: 1.1rem 2.8rem; font-size: 1.1rem; border-radius: 50px;">View Our Tiers</a>
+                    </div>
+                </div>
+                <div class="hero-image animate" style="flex:1; animation-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=1200"
+                        alt="Exotic Car Detailing" style="box-shadow: 0 40px 80px -15px rgba(0,0,0,0.12);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" style="padding: 120px 0;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Professional Automotive Solutions</h2>
+                    <p style="color:var(--text-muted)">We use eco-friendly products and industry-leading techniques to
+                        ensure your vehicle stays in showroom condition.</p>
+                </div>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:2.5rem;">
+                    <div class="feature-card animate">
+                        <div class="feature-icon">✨</div>
+                        <h3>Deep Interior Care</h3>
+                        <p style="color:var(--text-muted); margin-top:1rem;">Micro-mist decontamination and leather
+                            nourishment for a fresh, hygienic cabin.</p>
+                    </div>
+                    <div class="feature-card animate" style="animation-delay: 0.1s;">
+                        <div class="feature-icon">💎</div>
+                        <h3>Nano-Ceramic Coat</h3>
+                        <p style="color:var(--text-muted); margin-top:1rem;">Long-lasting protection against UV, road
+                            grime, and water spots with an incredible shine.</p>
+                    </div>
+                    <div class="feature-card animate" style="animation-delay: 0.2s;">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Routine Maintenance</h3>
+                        <p style="color:var(--text-muted); margin-top:1rem;">Full system diagnostics and vital fluid
+                            replacements by certified elite mechanics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us Section -->
+        <section id="why-us" style="padding: 100px 0; background: #fff; border-top: 1px solid #f1f5f9;">
+            <div class="container" style="display:flex; align-items:center; gap:5rem; flex-wrap:wrap;">
+                <div style="flex:1; min-width:350px;" class="animate">
+                    <img src="https://images.unsplash.com/photo-1562426509-5044a121aa49?auto=format&fit=crop&q=80&w=800"
+                        alt="Team Work" style="width:100%; border-radius:40px; box-shadow: var(--shadow-lg);">
+                </div>
+                <div style="flex:1.2; min-width:350px;" class="animate" style="animation-delay:0.2s">
+                    <h2 style="font-size:3rem; margin-bottom:1.5rem;">The AutoElite Standard</h2>
+                    <p style="color:var(--text-muted); margin-bottom:2rem;">We believe in transparency and quality.
+                        Every car that visits our garage undergoes a rigorous 25-point inspection, documented through
+                        our digital reporting system.</p>
+                    <ul style="list-style:none; padding:0;">
+                        <li style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center;">
+                            <span style="color:var(--secondary); font-size:1.5rem;">✔</span> <strong>Secure OTP
+                                Verification</strong> for every booking.
+                        </li>
+                        <li style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center;">
+                            <span style="color:var(--secondary); font-size:1.5rem;">✔</span> <strong>Certified
+                                Technicians</strong> with 10+ years experience.
+                        </li>
+                        <li style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center;">
+                            <span style="color:var(--secondary); font-size:1.5rem;">✔</span> <strong>Instant PDF
+                                Reports</strong> delivered to your dashboard.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" style="padding: 120px 0;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Recent Work</h2>
+                    <p>Take a look at the elite machines we've recently restored.</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item animate">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800"
+                            alt="V1">
+                    </div>
+                    <div class="gallery-item animate" style="animation-delay:0.1s">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800"
+                            alt="V2">
+                    </div>
+                    <div class="gallery-item animate" style="animation-delay:0.2s">
+                        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=800"
+                            alt="V3">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="container animate">
+            <div class="map-section" style="padding: 3rem; text-align:center;">
+                <h2 style="margin-bottom:1rem;">Visit Us Daily</h2>
+                <p style="color:var(--text-muted); margin-bottom:3rem;">Located conveniently near CHARUSAT University
+                    campus.</p>
+                <div style="border-radius:24px; overflow:hidden; box-shadow: var(--shadow-lg);">
+                    <iframe
+                        src="https://www.google.com/maps?q=Charotar+University+of+Science+and+Technology+(CHARUSAT)&output=embed"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="padding: 120px 0; text-align:center; background: var(--primary); color: white;">
+            <div class="container">
+                <h2 style="font-size:3.5rem; margin-bottom:1.5rem;">Ready for the Elite Experience?</h2>
+                <p style="font-size:1.25rem; margin-bottom:3rem; opacity:0.9;">Book your slot online and get a priority
+                    25-point inspection.</p>
+                <a href="login.html" class="btn btn-outline"
+                    style="background:white; color:var(--primary); padding:1.2rem 3rem; font-size:1.2rem; border:none; box-shadow: var(--shadow-lg);">Book
+                    Appointment Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 80px 0; background: #fff; border-top: 1px solid #f1f5f9;">
+        <div class="container"
+            style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem;">
+            <div>
+                <a href="index.html" class="logo" style="font-size: 1.8rem;">AUTO<span>ELITE</span></a>
+                <p style="color:var(--text-muted); margin-top:1rem;">© 2026 AutoElite Garage. All rights reserved.</p>
+            </div>
+            <div style="display:flex; gap:3rem;">
+                <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                    <strong>Company</strong>
+                    <a href="#" style="color:var(--text-muted); text-decoration:none;">About</a>
+                    <a href="#" style="color:var(--text-muted); text-decoration:none;">Sustainability</a>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                    <strong>Support</strong>
+                    <a href="#" style="color:var(--text-muted); text-decoration:none;">Privacy Policy</a>
+                    <a href="#" style="color:var(--text-muted); text-decoration:none;">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+This folder is for manual backups of your system data. Since the app runs directly in the browser, live data is stored in your browser's LocalStorage. Use the 'Backup System Data' button in the Admin Panel to save data here.
